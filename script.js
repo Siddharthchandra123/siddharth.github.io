@@ -1,42 +1,46 @@
-/* TYPING EFFECT */
-const text = [
+/* =========================
+   TYPING EFFECT
+========================= */
+const typingTexts = [
   "AI Developer",
   "Full-Stack Engineer",
   "Big Dreams",
   "Problem Solver"
 ];
 
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
+let textIndex = 0;
+let charIndex = 0;
+const typingEl = document.querySelector(".typing");
 
-(function type() {
-  if (count === text.length) count = 0;
-  currentText = text[count];
-  letter = currentText.slice(0, ++index);
+function typeEffect() {
+  if (!typingEl) return;
 
-  document.querySelector(".typing").textContent = letter;
+  const current = typingTexts[textIndex];
+  typingEl.textContent = current.slice(0, charIndex++);
 
-  if (letter.length === currentText.length) {
+  if (charIndex > current.length) {
     setTimeout(() => {
-      index = 0;
-      count++;
+      charIndex = 0;
+      textIndex = (textIndex + 1) % typingTexts.length;
     }, 1200);
   }
 
-  setTimeout(type, 120);
-})();
+  setTimeout(typeEffect, 120);
+}
 
-/* SCROLL REVEAL */
-const reveals = document.querySelectorAll(".reveal");
+typeEffect();
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+const revealElements = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {
-  reveals.forEach(el => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    const revealPoint = 120;
+  const windowHeight = window.innerHeight;
+  const revealPoint = 120;
 
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
     if (elementTop < windowHeight - revealPoint) {
       el.classList.add("active");
     }
@@ -46,29 +50,30 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
-/* PARALLAX GLOW */
-document.addEventListener("mousemove", e => {
-  document.querySelector(".glow-1").style.transform =
-    `translate(${e.clientX / 40}px, ${e.clientY / 40}px)`;
+/* =========================
+   DISABLE ALL IMAGE MOTION
+========================= */
+
+// Ensure no transforms are applied by JS
+const staticElements = [
+  ".profile-ring",
+  ".glow-1",
+  ".badge"
+];
+
+staticElements.forEach(selector => {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.style.transform = "none";
+    el.style.transition = "none";
+  }
 });
-/* BADGE 3D TILT */
+/* =========================
+   INFINITE CERTIFICATE LOOP
+========================= */
+const track = document.querySelector(".netflix-track");
 
-
-badge.addEventListener("mouseleave", () => {
-  badge.style.transform = "rotateX(0) rotateY(0)";
-});
-/* PROFILE TILT */
-const profile = document.querySelector(".profile-ring");
-
-profile.addEventListener("mousemove", e => {
-  const rect = profile.getBoundingClientRect();
-  const x = e.clientX - rect.left - rect.width / 2;
-  const y = e.clientY - rect.top - rect.height / 2;
-
-  profile.style.transform =
-    `rotateX(${ -y / 25 }deg) rotateY(${ x / 25 }deg) scale(1.05)`;
-});
-
-profile.addEventListener("mouseleave", () => {
-  profile.style.transform = "rotateX(0) rotateY(0)";
-});
+if (track) {
+  // Duplicate content once for seamless loop
+  track.innerHTML += track.innerHTML;
+}

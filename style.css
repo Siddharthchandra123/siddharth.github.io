@@ -291,11 +291,6 @@ h2 {
   transition: transform 0.4s ease;
 }
 
-/* HOVER */
-.circle-frame:hover img {
-  transform: translateY(10%) scale(1.03);
-}
-
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .circle-frame {
@@ -306,4 +301,109 @@ h2 {
   .circle-frame img {
     height: 150%;
   }
+}
+.profile-ring,
+.glow-1,
+.badge {
+  transform: none !important;
+  transition: none !important;
+}
+.netflix-section {
+  padding: 80px 6%;
+  background: #0e0e11;
+  color: #fff;
+}
+
+.netflix-title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+/* Horizontal Scroll Row */
+.netflix-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar (Netflix style) */
+.netflix-row::-webkit-scrollbar {
+  display: none;
+}
+.netflix-row {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Card */
+.netflix-card {
+  flex: 0 0 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141414;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* Image */
+.netflix-card img {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+
+  /* HARD STOP FALLING */
+  transform: none !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Info overlay */
+.card-info {
+  padding: 20px;
+}
+
+.card-info h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.card-info span {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Subtle hover (NO movement) */
+.netflix-card:hover img {
+  opacity: 0.9;
+}
+/* ==============================
+   INFINITE NETFLIX AUTO SCROLL
+================================ */
+
+
+
+/* Moving track */
+.netflix-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scrollCertificates 40s linear infinite;
+}
+
+/* Pause on hover (optional – remove if unwanted) */
+.netflix-row:hover .netflix-track {
+  animation-play-state: paused;
+}
+
+/* Infinite motion */
+@keyframes scrollCertificates {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.netflix-track {
+  animation: scrollCertificates 25s linear infinite; /* faster */
 }
