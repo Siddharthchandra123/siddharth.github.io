@@ -407,3 +407,25 @@ h2 {
 .netflix-track {
   animation: scrollCertificates 25s linear infinite; /* faster */
 }
+/* PROJECT LINKS */
+.project-links {
+  margin-top: 18px;
+  display: flex;
+  gap: 15px;
+}
+
+.project-links a {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #4efcdc;
+  color: #4efcdc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.project-links a:hover {
+  background: #4efcdc;
+  color: #000;
+  transform: translateY(-2px);
+}
